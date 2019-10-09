@@ -1,4 +1,4 @@
-## Interface: 70200
+## Interface: 11302
 ## Title: |cff66ccffMailNotifier|r
 ## Notes: Displays how many unread mails you have and informs you when new mail is received
 ## Notes-esES: Muestra cuántos mensajes tienes sin leer y te informa cuando recibes nuevo correo
@@ -10,7 +10,7 @@
 
 ## Author: Jaliborc (João Cardoso)
 ## X-Credits: A special thanks to Sparanoid, LigthSora, Andy2508 and closetou, for translating MailNotifier to other languages
-## X-License: GNU General Public License Version 3
+## X-License: All Rights Reserved
 ## X-Category: Mail
 
 ## SavedVariables: MailNotifier_DisableSound

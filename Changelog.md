@@ -1,3 +1,15 @@
+##### 8.2.1
+* Updated for World of Wacraft patch 8.2.1 and classic.
+
+##### 8.2.0
+* Updated for World of Warcraft patch 8.2.0.
+
+##### 8.1.0
+* Updated for World of Warcraft patch 8.1.0.
+
+##### 25
+* Updated for Shadow of Argus
+
 ##### 24
 * Updated for Tomb of Sargeras
 

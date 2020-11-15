@@ -1,7 +1,7 @@
 ![Preview](http://jaliborc.com/images/addons/large/mailnotifier.jpg)
 
-[![Install](http://img.shields.io/badge/install-twitch-blueviolet)](https://www.curseforge.com/wow/addons/mailnotifier/files)
-[![Patreon](http://img.shields.io/badge/donate-patreon-orange)](https://www.patreon.com/jaliborc)
+[![Install](http://img.shields.io/badge/install-curseforge-484266)](https://www.curseforge.com/wow/addons/mailnotifier/files)
+[![Patreon](http://img.shields.io/badge/donate-patreon-ff4d42)](https://www.patreon.com/jaliborc)
 
 # MailNotifier :email:
 MailNotifier is a small World of Warcraft addon that has two purposes: tracking how many unread mails the player has in the inbox and alerting him when new mail is received (plays a sound and flashes the minimap mail button).

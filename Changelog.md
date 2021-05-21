@@ -1,3 +1,6 @@
+#### 9.0.1
+* Updated for the Burning Crusade.
+
 #### 9.0.0
 * Updated for Shadowlands.
 

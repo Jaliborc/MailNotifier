@@ -1,5 +1,5 @@
 --[[
-Copyright 2007-2020 João Cardoso
+Copyright 2007-2021 João Cardoso
 MailNotifier is distributed under the terms of the GNU General Public License (or the Lesser GPL).
 This file is part of MailNotifier.
 

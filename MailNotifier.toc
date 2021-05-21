@@ -1,5 +1,5 @@
-## Interface: 11305
-## Version: 9.0.0
+## Interface: 20501
+## Version: 9.0.1
 ## Author: Jaliborc (João Cardoso)
 
 ## Title: |cff66ccffMailNotifier|r

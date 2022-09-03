@@ -1,3 +1,6 @@
+#### 9.1.0
+* Updated for Chains of Domination and Wrath of the Lich King.
+
 #### 9.0.1
 * Updated for the Burning Crusade.
 

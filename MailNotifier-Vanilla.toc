@@ -1,0 +1,20 @@
+## Title: |TInterface/Addons/MailNotifier/Media/Enabled:16:16|t MailNotifier
+## Notes: Displays how many unread mails you have and|ninforms you when new mail is received.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/MailNotifier/Media/Patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
+## Notes-esES: Muestra cuántos mensajes tienes sin leer|ny te informa cuando recibes nuevo correo.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/MailNotifier/Media/Patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
+## Notes-esMX: Muestra cuántos mensajes tienes sin leer|ny te informa cuando recibes nuevo correo.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/MailNotifier/Media/Patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
+## Notes-deDE: Zeigt an, wie viele ungelesene Briefe du hast|nund informiert dich, wenn du neue Briefe erhältst.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/MailNotifier/Media/Patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
+## Notes-koKR: 않은 우편의 갯수와 새로운 우편을 받았을때 알려줍니다.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/MailNotifier/Media/Patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
+## Notes-zhCN: 显示未读邮件数量并以声音提示有新邮件到达.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/MailNotifier/Media/Patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
+## Notes-zhTW: 顯示未讀郵件數量并以聲音提示有新郵件到達.|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/MailNotifier/Media/Patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/MailNotifier/Media/Discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
+## X-Credits: A special thanks to Sparanoid, LigthSora, Andy2508 and closetou, for translating MailNotifier to other languages
+## X-License: All Rights Reserved
+## Author: Jaliborc (João Cardoso)
+## X-Category: Mail
+
+## SavedVariables: MailNotifier_DisableSound
+## SavedVariablesPerCharacter: MailNotifier_Senders, MailNotifier_Count
+## Interface: 11506
+## Version: 11.1
+
+Localization.lua
+MailNotifier.lua

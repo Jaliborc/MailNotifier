@@ -1,65 +1,51 @@
 --[[
-Copyright 2007-2022 João Cardoso
-MailNotifier is distributed under the terms of the GNU General Public License (or the Lesser GPL).
-This file is part of MailNotifier.
-
-MailNotifier is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-MailNotifier is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with MailNotifier. If not, see <http://www.gnu.org/licenses/>.
+Copyright 2007-2025 João Cardoso
+All Rights Reserved
 --]]
 
 local MailNotifier = CreateFrame('Frame', 'MailNotifier')
-local Parent, Indicator, Shine, Flasher
-
 local FakeEvent, NewMails, AtInbox
-local LastAlert, StartDelay = 0
+local LastAlert = 0
 
-local L = MailNotifier_Locals
 local AUCTION_OUTBID = ERR_AUCTION_OUTBID_S:gsub('%%s', '%.+')
 local AUCTION_WON = ERR_AUCTION_WON_S:gsub('%%s', '%.+')
+local IS_CLASSIC = MiniMapMailFrame and true
+local L = MailNotifier_Locals
 
 
 --[[ Startup ]]--
 
-function MailNotifier:Startup()
-	MiniMapMailFrame:SetScript('OnEnter', self.OnEnter)
-	MiniMapMailFrame:SetScript('OnEvent', nil)
-
+function MailNotifier:OnLoad()
 	MailNotifier_Senders = MailNotifier_Senders or {}
 	MailNotifier_Count = MailNotifier_Count or 0
 
-	Indicator = MiniMapMailFrame:CreateFontString('MailNotifierIndicator', 'OVERLAY')
-	Indicator:SetFontObject('NumberFontNormal')
-	Indicator:SetPoint('CENTER', MiniMapMailFrame, 'CENTER', -1, 1)
-	Indicator:SetJustifyH('CENTER')
+	self.Frame = MiniMapMailFrame or MinimapCluster.IndicatorFrame.MailFrame
+	self.Frame:SetScript('OnEnter', self.OnEnter)
 
-	Parent = CreateFrame('Frame', 'MailNotifierFrame', MiniMapMailFrame)
-	Parent:SetAlpha(0)
-	Flasher = Parent:CreateAnimationGroup()
+	self.Indicator = self.Frame:CreateFontString(nil, 'OVERLAY')
+	self.Indicator:SetPoint('CENTER', self.Frame, 'CENTER', IS_CLASSIC and -1 or 0, IS_CLASSIC and 1 or 0)
+	self.Indicator:SetFontObject(IS_CLASSIC and 'NumberFontNormal' or 'NumberFontNormalSmall')
+	self.Indicator:SetJustifyH('CENTER')
 
-	Shine = Parent:CreateTexture('MailNotifierShine', 'OVERLAY', 8)
-	Shine:SetTexture('Interface\\Calendar\\EventNotificationGlow')
-	Shine:SetPoint('CENTER', MiniMapMailFrame, 'CENTER', -2, 2)
-	Shine:SetHeight(35) Shine:SetWidth(35)
-	Shine:SetBlendMode('ADD')
+	local flashParent = CreateFrame('Frame', nil, self.Frame)
+	flashParent:SetAlpha(0)
+
+	local shine = flashParent:CreateTexture(nil, 'OVERLAY', nil, 7)
+	shine:SetTexture('Interface\\Calendar\\EventNotificationGlow')
+	shine:SetPoint('CENTER', self.Frame, 'CENTER', -2, 2)
+	shine:SetHeight(35) shine:SetWidth(35)
+	shine:SetBlendMode('ADD')
+
+	self.Flasher = flashParent:CreateAnimationGroup()
 
 	for i = 1,4 do
-		local fadeIn = Flasher:CreateAnimation('Alpha')
+		local fadeIn = self.Flasher:CreateAnimation('Alpha')
 		fadeIn:SetDuration(1)
 		fadeIn:SetFromAlpha(0)
 		fadeIn:SetToAlpha(1)
 		fadeIn:SetOrder(i*2)
 
-		local fadeOut = Flasher:CreateAnimation('Alpha')
+		local fadeOut = self.Flasher:CreateAnimation('Alpha')
 		fadeOut:SetDuration(1)
 		fadeOut:SetFromAlpha(0)
 		fadeOut:SetToAlpha(1)
@@ -67,62 +53,51 @@ function MailNotifier:Startup()
 	end
 	
 	self:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
-	self:RegisterEvent('UPDATE_PENDING_MAIL')
 	self:RegisterEvent('PLAYER_LOGOUT')
 	self.Startup = nil
-end
 
-function MailNotifier:UPDATE_PENDING_MAIL()
-	StartDelay = GetTime() + 5
-	GetLatestThreeSenders() -- Query the server
-	MiniMapMailFrame:SetShown(HasNewMail()) -- Query the server
+	EventUtil.RegisterOnceFrameEventAndCallback('UPDATE_PENDING_MAIL', function()
+		GetLatestThreeSenders() -- Query the server
+		HasNewMail() -- Query the server
 
-	self:SetScript('OnUpdate', self.Initialize)
-	self:SetNumMails()
-end
-
-function MailNotifier:Initialize()
-	local time = GetTime()
-	if time > StartDelay then
-		if HasNewMail() and not AtInbox then
-			local newMails = 0
-			for newI, sender in pairs({GetLatestThreeSenders()}) do
-				local oldI, off = MailNotifier_Senders[sender] or 0
-				if newI >= oldI then
-					off = newI - oldI
-				else
-					off = 3 - oldI + newI
+		C_Timer.After(5, function()
+			if HasNewMail() and not AtInbox then
+				local newMails = 0
+				for newI, sender in pairs({GetLatestThreeSenders()}) do
+					local oldI, off = MailNotifier_Senders[sender] or 0
+					if newI >= oldI then
+						off = newI - oldI
+					else
+						off = 3 - oldI + newI
+					end
+						
+					newMails = max(newMails, off)
 				end
-					
-				newMails = max(newMails, off)
+				
+				self:AddNewMail(newMails)
+			else
+				self:SetNumMails()
 			end
 			
-			self:AddNewMail(newMails)
-		else
-			self:SetNumMails()
-		end
-		
-		self:RegisterEvent('PLAYER_ENTERING_WORLD')
-		self:RegisterEvent('MAIL_INBOX_UPDATE')
-		self:RegisterEvent('CHAT_MSG_SYSTEM')
-		self:RegisterEvent('MAIL_CLOSED')
-		self:SetScript('OnUpdate', nil)
-		self.Initialize = nil
-		
-		function self:UPDATE_PENDING_MAIL()
-			MiniMapMailFrame:SetShown(HasNewMail())
-
-			if FakeEvent or AtInbox then
-				FakeEvent = nil
-			elseif HasNewMail() then
-				self:AddNewMail(1)
-			end
-		end
-	end
+			self:RegisterEvent('PLAYER_ENTERING_WORLD')
+			self:RegisterEvent('UPDATE_PENDING_MAIL')
+			self:RegisterEvent('MAIL_INBOX_UPDATE')
+			self:RegisterEvent('CHAT_MSG_SYSTEM')
+			self:RegisterEvent('MAIL_CLOSED')
+		end)
+	end)
 end
 
 
 --[[ Inbox ]]--
+
+function MailNotifier:UPDATE_PENDING_MAIL()
+	if FakeEvent or AtInbox then
+		FakeEvent = nil
+	elseif HasNewMail() then
+		self:AddNewMail(1)
+	end
+end
 
 function MailNotifier:MAIL_INBOX_UPDATE()
 	local newMails = 0
@@ -176,11 +151,11 @@ function MailNotifier:AddNewMail(new)
 	local time = GetTime()
 	if new > 0 and time > LastAlert then
 		if not MailNotifier_DisableSound then
-			PlaySoundFile('Interface\\AddOns\\MailNotifier\\NewMail.mp3')
+			PlaySoundFile('Interface/AddOns/MailNotifier/Media/NewMail.mp3')
 		end
 		
 		LastAlert = time + 15
-		Flasher:Play()
+		self.Flasher:Play()
 	end
 
 	self:SetNumMails(self:GetNumMails() + new)
@@ -188,9 +163,9 @@ end
 
 function MailNotifier:SetNumMails(value)
 	MailNotifier_Count = max(value or MailNotifier_Count or 0, HasNewMail() and 1 or 0 , select('#', GetLatestThreeSenders()))
-	Indicator:SetText(MailNotifier_Count or '')
+	self.Indicator:SetText(MailNotifier_Count or '')
 
-	if GameTooltip:IsOwned(MiniMapMailFrame) then
+	if GameTooltip:IsOwned(self.Frame) then
 		self:UpdateTip()
 	end
 end
@@ -234,4 +209,4 @@ end
 
 --[[ Start Addon ]]--
 
-MailNotifier:Startup()
+MailNotifier:OnLoad()

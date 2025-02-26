@@ -3,14 +3,16 @@ Copyright 2007-2025 João Cardoso
 All Rights Reserved
 --]]
 
-local MailNotifier = CreateFrame('Frame', 'MailNotifier')
-local FakeEvent, NewMails, AtInbox
-local LastAlert = 0
+local ADDON, Addon = ...
+local MailNotifier = LibStub('WildAddon-1.1'):NewAddon(ADDON, Addon)
 
 local AUCTION_OUTBID = ERR_AUCTION_OUTBID_S:gsub('%%s', '%.+')
 local AUCTION_WON = ERR_AUCTION_WON_S:gsub('%%s', '%.+')
 local IS_CLASSIC = MiniMapMailFrame and true
 local L = MailNotifier_Locals
+
+local FakeEvent, NewMails, AtInbox
+local LastAlert = 0
 
 
 --[[ Startup ]]--
@@ -52,11 +54,8 @@ function MailNotifier:OnLoad()
 		fadeOut:SetOrder(i*2+1)
 	end
 	
-	self:SetScript('OnEvent', function(self, event, ...) self[event](self, ...) end)
 	self:RegisterEvent('PLAYER_LOGOUT')
-	self.Startup = nil
-
-	EventUtil.RegisterOnceFrameEventAndCallback('UPDATE_PENDING_MAIL', function()
+	self:ContinueOn('UPDATE_PENDING_MAIL', function()
 		GetLatestThreeSenders() -- Query the server
 		HasNewMail() -- Query the server
 
@@ -89,7 +88,7 @@ function MailNotifier:OnLoad()
 end
 
 
---[[ Inbox ]]--
+--[[ Inbox Events ]]--
 
 function MailNotifier:UPDATE_PENDING_MAIL()
 	if FakeEvent or AtInbox then
@@ -205,8 +204,3 @@ function MailNotifier:UpdateTip()
 	
 	GameTooltip:Show()
 end
-
-
---[[ Start Addon ]]--
-
-MailNotifier:OnLoad()

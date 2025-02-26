@@ -17,5 +17,8 @@
 ## Interface: 110100
 ## Version: 11.1
 
-Localization.lua
-MailNotifier.lua
+libs/LibStub/LibStub.lua
+libs/WildAddon-1.1/WildAddon-1.0.lua
+
+src/Localization.lua
+src/MailNotifier.lua

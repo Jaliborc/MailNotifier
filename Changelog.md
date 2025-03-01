@@ -1,3 +1,6 @@
+### 11.1.1
+* All: Modernized code using WildAddon-1.1.
+
 ## 11.1
 * Retail: Updated for the Dragonflight/War Within new minimap interface. Support retained for the classic style.
 * Retail: Added support for the new addon list native capabilities.

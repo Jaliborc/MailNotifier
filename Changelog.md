@@ -1,3 +1,6 @@
+### 11.1.2
+* Retail: Updated description to match the new addon list formatting.
+
 ### 11.1.1
 * All: Modernized code using WildAddon-1.1.
 

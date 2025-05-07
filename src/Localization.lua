@@ -40,8 +40,8 @@ elseif Language == 'frFR' then
 	
 -- Russian -- ZamestoTV
 elseif Language == 'ruRU' then
-	L.HaveMail = 'У вас примерно %s непрочитанное письмо'
-	L.HaveMails = 'У вас примерно %s непрочитанных писем'
+	L.HaveMail = 'У вас %s непрочитанное письмо'
+	L.HaveMails = 'У вас %s непрочитанных писем'
 	L.From = ' от:'
 	
 -- English --

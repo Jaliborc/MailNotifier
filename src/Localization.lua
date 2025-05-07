@@ -38,6 +38,12 @@ elseif Language == 'frFR' then
 	L.HaveMails = 'Vous avez %s messages non lus' 
 	L.From = ' de:' 
 	
+-- Russian -- ZamestoTV
+elseif Language == 'ruRU' then
+	L.HaveMail = 'У вас примерно %s непрочитанное письмо'
+	L.HaveMails = 'У вас примерно %s непрочитанных писем'
+	L.From = ' от:'
+	
 -- English --
 else
 	L.HaveMail = 'You have about %s unread mail'

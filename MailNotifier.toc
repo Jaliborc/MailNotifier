@@ -13,8 +13,8 @@
 
 ## SavedVariables: MailNotifier_DisableSound
 ## SavedVariablesPerCharacter: MailNotifier_Senders, MailNotifier_Count
-## Interface: 110105, 50500, 40402, 30404, 20504, 11507
-## Version: 11.1.4
+## Interface: 110200, 50500, 40402, 30404, 20504, 11507
+## Version: 11.2
 
 libs/LibStub/LibStub.lua
 libs/WildAddon-1.1/WildAddon-1.1.lua

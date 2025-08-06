@@ -1,3 +1,9 @@
+## 11.2
+* Retail: Updated for Ghosts of K'aresh update.
+
+### 11.1.5
+* Moved back to a full addon-based event handling, as Blizzard's event registry is prone to event loss (thank you to the dev community for all the suggestions).
+
 ### 11.1.4
 * Added support for Mists of Pandaria servers.
 

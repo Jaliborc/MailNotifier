@@ -9,12 +9,12 @@
 ## X-Credits: A special thanks to Sparanoid, LigthSora, Andy2508 and closetou, for translating MailNotifier to other languages
 ## X-License: All Rights Reserved
 ## Author: Jaliborc (João Cardoso)
-## X-Category: Mail
+## Category: Mail
 
 ## SavedVariables: MailNotifier_DisableSound
 ## SavedVariablesPerCharacter: MailNotifier_Senders, MailNotifier_Count
-## Interface: 120000, 110205, 50501, 40402, 30404, 20504, 11507
-## Version: 11.2.2
+## Interface: 120001, 110207, 50501, 40402, 30404, 20505, 11507
+## Version: 11.2.3
 
 libs/LibStub/LibStub.lua
 libs/WildAddon-1.1/WildAddon-1.1.lua

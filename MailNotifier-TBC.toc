@@ -14,7 +14,7 @@
 
 ## SavedVariables: MailNotifier_DisableSound
 ## SavedVariablesPerCharacter: MailNotifier_Senders, MailNotifier_Count
-## Interface: 120001, 110207
+## Interface: 20505
 ## Version: 11.2.3
 
 libs/LibStub/LibStub.lua

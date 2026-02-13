@@ -6,6 +6,7 @@ All Rights Reserved
 local ADDON, Addon = ...
 local MailNotifier = LibStub('WildAddon-1.1'):NewAddon(ADDON, Addon)
 
+local issecretvalue = issecretvalue or nop
 local AUCTION_OUTBID = ERR_AUCTION_OUTBID_S:gsub('%%s', '%.+')
 local AUCTION_WON = ERR_AUCTION_WON_S:gsub('%%s', '%.+')
 local IS_CLASSIC = MiniMapMailFrame and true
@@ -54,6 +55,7 @@ function MailNotifier:OnLoad()
 		fadeOut:SetOrder(i*2+1)
 	end
 	
+	self:SetNumMails()
 	self:RegisterEvent('PLAYER_LOGOUT')
 	self:ContinueOn('UPDATE_PENDING_MAIL', function()
 		GetLatestThreeSenders() -- Query the server
@@ -127,10 +129,12 @@ function MailNotifier:PLAYER_ENTERING_WORLD()
 end
 
 function MailNotifier:CHAT_MSG_SYSTEM(message)
-	if strmatch(message, AUCTION_OUTBID) then
-		self:UPDATE_PENDING_MAIL()
-	elseif message == ERR_AUCTION_REMOVED or strmatch(message, AUCTION_WON) then
-		FakeEvent = true
+	if not issecretvalue(message) then
+		if strmatch(message, AUCTION_OUTBID) then
+			self:UPDATE_PENDING_MAIL()
+		elseif message == ERR_AUCTION_REMOVED or strmatch(message, AUCTION_WON) then
+			FakeEvent = true
+		end
 	end
 end  
 

@@ -1,3 +1,6 @@
+### 12.0.1
+* Fixed issue with secret values.
+
 ## 12.0.0
 * Updated TOC numbers for Midnight live servers.
 

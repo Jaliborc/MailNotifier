@@ -1,3 +1,6 @@
+### 12.0.2
+* Updated TOC numbers for Retail and Mists servers.
+
 ### 12.0.1
 * Fixed issue with secret values.
 

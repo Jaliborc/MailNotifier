@@ -1,3 +1,6 @@
+## 12.1
+* Added support for 12.1 servers and the new classic TOC format.
+
 ### 12.0.2
 * Updated TOC numbers for Retail and Mists servers.
 
